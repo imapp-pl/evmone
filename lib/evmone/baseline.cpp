@@ -6,6 +6,7 @@
 #include "execution_state.hpp"
 #include "instructions.hpp"
 #include <evmc/instructions.h>
+#include <cassert>
 #include <memory>
 
 namespace evmone
@@ -711,9 +712,8 @@ evmc_result baseline_execute(evmc_vm* /*vm*/, const evmc_host_interface* host,
             state->status = selfdestruct(*state);
             goto exit;
         default:
-            // TODO: Should not happen.
-            state->status = EVMC_INTERNAL_ERROR;
-            goto exit;
+            assert(false);
+            INTX_UNREACHABLE;
         }
 
         ++pc;
