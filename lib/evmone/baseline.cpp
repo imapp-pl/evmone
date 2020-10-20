@@ -35,7 +35,7 @@ const uint8_t* op_jump(ExecutionState& state, const JumpdestMap& jumpdest_map) n
     if (dst >= jumpdest_map.size() || !jumpdest_map[static_cast<size_t>(dst)])
     {
         state.status = EVMC_BAD_JUMP_DESTINATION;
-        return &*state.code.end();
+        return &state.code[0] + state.code.size();
     }
 
     return &state.code[static_cast<size_t>(dst)];
